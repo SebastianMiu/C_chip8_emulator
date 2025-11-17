@@ -15,11 +15,10 @@
 /* default colors: background 0x000000
                    pixel 0xffffff
                    */
+
 #define BACKGROUND_COLOR 0x000000
 #define PIXEL_COLOR 0xcdf7f6
 
-
-// beige pixel 0xcdf7f6 green bg 0x4e5e45
 
 #define pixel_size 20 // scale for SDL screen
 
@@ -61,7 +60,7 @@ typedef struct{
 // sdl initialization
 bool init_sdl(void) {
 
-    // TO DO: SDL_INIT_TIMER
+
 
 
     Uint32 flags = SDL_INIT_VIDEO | SDL_INIT_AUDIO;
@@ -506,19 +505,6 @@ void compute_instruction(chip8_t *chip8) {
             break;
 
 
-//            // Debug
-//            SDL_Log("DRAW @ PC=0x%03X I=0x%03X Vx=0x%02X Vy=0x%02X N=%d",
-//                    chip8->PC - 2, chip8->I,
-//                    V[chip8->instruction.X], V[chip8->instruction.Y],
-//                    chip8->instruction.N);
-//
-//            for (int row = 0; row < chip8->instruction.N; row++) {
-//                uint8_t b = chip8->ram[chip8->I + row];
-//                SDL_Log(" sprite[%d] = 0x%02X", row, b);
-            //       }
-
-
-
 
         case 0xE: { // Key operations
             uint8_t X = chip8->instruction.X;
@@ -616,16 +602,6 @@ void compute_instruction(chip8_t *chip8) {
 
 
 
-    // debug
-//    if ((opcode & 0xF000) == 0xD000)
-//        SDL_Log("DRAW instruction at PC=0x%03X I=0x%03X", chip8->PC-2, chip8->I);
-
-
-
-
-
-
-
 
 
 int main(int argc, char *argv[]) {
@@ -714,6 +690,8 @@ int main(int argc, char *argv[]) {
 
         if (chip8.state == PAUSE) continue;
 
+
+      // compute instruction
         for(int i=0; i<8; i++) {
             compute_instruction(&chip8);
         }
@@ -744,8 +722,6 @@ int main(int argc, char *argv[]) {
         SDL_Delay(1000/60);
 
 
-        //compute_instruction(&chip8);
-
 
     }
 
@@ -759,4 +735,5 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
 
